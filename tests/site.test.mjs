@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { access, readFile, stat } from 'node:fs/promises';
 
 test('page exposes required landmarks and hooks', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
@@ -77,4 +77,15 @@ test('contact dialog uses native modal semantics and announces the demo status',
   assert.match(html, /data-contact-status[^>]*aria-live="polite"/);
   assert.match(js, /showModal\(\)/);
   assert.match(js, /Messages are not transmitted from this portfolio demo/);
+});
+
+test('hero serves an optimized modern image before the PNG fallback', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+  const png = await stat(new URL('../assets/hills.png', import.meta.url));
+  const webpUrl = new URL('../assets/hills.webp', import.meta.url);
+  const webpExists = await access(webpUrl).then(() => true, () => false);
+  assert.ok(webpExists, 'Missing optimized WebP hero image');
+  const webp = await stat(webpUrl);
+  assert.ok(webp.size < png.size, 'WebP must be smaller than the PNG source');
+  assert.match(css, /image-set\([\s\S]*hills\.webp[\s\S]*hills\.png/);
 });
