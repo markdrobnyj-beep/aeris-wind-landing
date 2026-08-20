@@ -38,3 +38,10 @@ test('script wires the agreed interaction hooks', async () => {
     assert.ok(js.includes(hook), `Missing ${hook}`);
   }
 });
+
+test('hero includes a project-statistics layer', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  for (const fragment of ['data-hero-stats', '32', 'Turbines', '210', 'MW', '480k', 'Homes powered']) {
+    assert.ok(html.includes(fragment), `Missing ${fragment}`);
+  }
+});
