@@ -45,3 +45,12 @@ test('hero includes a project-statistics layer', async () => {
     assert.ok(html.includes(fragment), `Missing ${fragment}`);
   }
 });
+
+test('hero styles include the snow-blue atmosphere treatment', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+  assert.match(css, /#EAF6FF/i);
+  assert.match(css, /hero-atmosphere/);
+  assert.match(css, /@keyframes atmosphere-shift/);
+  assert.match(css, /inset: -6%/);
+  assert.match(css, /opacity: \.42/);
+});
