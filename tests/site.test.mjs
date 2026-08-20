@@ -25,3 +25,16 @@ test('styles include responsive and reduced-motion support', async () => {
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /--cloud:/);
 });
+
+test('script wires the agreed interaction hooks', async () => {
+  const js = await readFile(new URL('../script.js', import.meta.url), 'utf8');
+  for (const hook of [
+    'data-open-contact',
+    'data-close-contact',
+    'data-contact-form',
+    'wind-marker',
+    'prefers-reduced-motion',
+  ]) {
+    assert.ok(js.includes(hook), `Missing ${hook}`);
+  }
+});
