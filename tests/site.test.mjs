@@ -106,3 +106,10 @@ test('desktop hero content is centered', async () => {
   assert.match(css, /\.hero-content\s*\{[^}]*text-align:\s*center[^}]*margin:\s*-20px auto 0/);
   assert.match(css, /\.hero-copy\s*\{[^}]*margin:\s*25px auto 27px/);
 });
+
+test('desktop hero keeps the full-screen two-line reference composition', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+  assert.match(css, /\.hero\s*\{[^}]*min-height:\s*100svh[^}]*justify-content:\s*flex-start[^}]*linear-gradient\(180deg/);
+  assert.match(css, /\.hero-content\s*\{[^}]*width:\s*min\(780px, 100%\)/);
+  assert.match(css, /\.hero-stats\s*\{[^}]*display:\s*none/);
+});
