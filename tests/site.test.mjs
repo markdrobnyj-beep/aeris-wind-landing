@@ -100,3 +100,9 @@ test('page presents a visible annual generation chart', async () => {
   assert.match(css, /\.generation-bar/);
   assert.match(css, /\.generation-bar\.is-projection/);
 });
+
+test('desktop hero content is centered', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+  assert.match(css, /\.hero-content\s*\{[^}]*text-align:\s*center[^}]*margin:\s*-20px auto 0/);
+  assert.match(css, /\.hero-copy\s*\{[^}]*margin:\s*25px auto 27px/);
+});
