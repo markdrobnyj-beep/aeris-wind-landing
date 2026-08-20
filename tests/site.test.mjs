@@ -89,3 +89,14 @@ test('hero serves an optimized modern image before the PNG fallback', async () =
   assert.ok(webp.size < png.size, 'WebP must be smaller than the PNG source');
   assert.match(css, /image-set\([\s\S]*hills\.webp[\s\S]*hills\.png/);
 });
+
+test('page presents a visible annual generation chart', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+  for (const fragment of ['id="generation"', 'data-generation-chart', '2022', '2026', '8.4', 'TWh']) {
+    assert.ok(html.includes(fragment), `Missing ${fragment}`);
+  }
+  assert.match(css, /\.generation-chart/);
+  assert.match(css, /\.generation-bar/);
+  assert.match(css, /\.generation-bar\.is-projection/);
+});
