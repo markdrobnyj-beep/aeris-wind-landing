@@ -48,7 +48,7 @@ h1 { font-size: clamp(54px, 7.2vw, 112px); line-height: .9; }
 h1 em, h2 em { font-family: var(--serif); font-weight: 500; }
 .hero-copy { max-width: 430px; margin: 25px auto 27px; font-size: 14px; line-height: 1.55; color: rgba(17,33,40,.76); }
 .hero-actions { display: flex; justify-content: center; align-items: center; gap: 24px; }
-.hero-stats { display:none; width: min(530px, 100%); grid-template-columns: repeat(3, 1fr); margin: 45px auto 0; border-top: 1px solid rgba(17,33,40,.34); border-bottom: 1px solid rgba(17,33,40,.22); }
+.hero-stats { display:grid; width: min(530px, 100%); grid-template-columns: repeat(3, 1fr); margin: 45px auto 0; border-top: 1px solid rgba(17,33,40,.34); border-bottom: 1px solid rgba(17,33,40,.22); }
 .hero-stats div { min-height: 78px; padding: 13px 15px 12px 0; border-right: 1px solid rgba(17,33,40,.22); }.hero-stats div + div { padding-left: 15px; }.hero-stats div:last-child { border-right: 0; }
 .hero-stats dt { font-size: 28px; font-weight: 600; letter-spacing: -.08em; line-height: 1; }.hero-stats dt small { font: 10px var(--mono); letter-spacing: 0; }.hero-stats dd { margin: 9px 0 0; font: 9px var(--mono); text-transform: uppercase; letter-spacing: .04em; }
 .text-link { padding: 4px 0; border: 0; background: none; border-bottom: 1px solid currentColor; color: var(--ink); font: 700 12px var(--sans); cursor: pointer; }
