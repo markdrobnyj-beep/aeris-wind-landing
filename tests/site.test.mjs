@@ -18,3 +18,10 @@ test('page exposes required landmarks and hooks', async () => {
     assert.ok(html.includes(fragment), `Missing ${fragment}`);
   }
 });
+
+test('styles include responsive and reduced-motion support', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+  assert.match(css, /@media \(max-width: 760px\)/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /--cloud:/);
+});
