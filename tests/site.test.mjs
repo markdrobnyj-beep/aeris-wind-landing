@@ -54,3 +54,10 @@ test('hero styles include the snow-blue atmosphere treatment', async () => {
   assert.match(css, /inset: -6%/);
   assert.match(css, /opacity: \.42/);
 });
+
+test('page communicates fleet scale and planned capacity', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  for (const fragment of ['id="momentum"', '5,284', 'Turbines built', '18', 'Countries connected', '1.6 GW', 'Planned capacity']) {
+    assert.ok(html.includes(fragment), `Missing ${fragment}`);
+  }
+});
