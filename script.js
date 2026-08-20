@@ -1,20 +1,27 @@
 const dialog = document.querySelector('#contact-dialog');
 const form = document.querySelector('[data-contact-form]');
+const formStatus = document.querySelector('[data-contact-status]');
 const marker = document.querySelector('#wind-marker');
+const siteHeader = document.querySelector('.site-header');
+const menuToggle = document.querySelector('[data-menu-toggle]');
+const mainNavigation = document.querySelector('#main-navigation');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let lastTrigger = null;
 
 function openContactDialog(trigger) {
   lastTrigger = trigger;
-  dialog.hidden = false;
+  dialog.showModal();
   document.body.style.overflow = 'hidden';
-  dialog.querySelector('input, textarea, button')?.focus();
+  dialog.querySelector('input')?.focus();
 }
 
 function closeContactDialog() {
-  dialog.hidden = true;
-  document.body.style.overflow = '';
-  lastTrigger?.focus();
+  dialog.close();
+}
+
+function setMenuOpen(isOpen) {
+  siteHeader?.classList.toggle('menu-open', isOpen);
+  menuToggle?.setAttribute('aria-expanded', String(isOpen));
 }
 
 function setupWindMarker() {
@@ -36,21 +43,30 @@ document.querySelectorAll('[data-close-contact]').forEach((button) => {
   button.addEventListener('click', closeContactDialog);
 });
 
+menuToggle?.addEventListener('click', () => {
+  setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+});
+
+mainNavigation?.addEventListener('click', (event) => {
+  if (event.target.closest('a')) setMenuOpen(false);
+});
+
 dialog?.addEventListener('click', (event) => {
   if (event.target === dialog) closeContactDialog();
 });
 
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && !dialog.hidden) closeContactDialog();
+dialog?.addEventListener('close', () => {
+  document.body.style.overflow = '';
+  lastTrigger?.focus();
+  lastTrigger = null;
 });
 
 form?.addEventListener('submit', (event) => {
   event.preventDefault();
   if (!form.reportValidity()) return;
-  form.replaceWith(Object.assign(document.createElement('p'), {
-    className: 'form-success',
-    textContent: 'Thanks — we’ll be in touch soon.',
-  }));
+  form.reset();
+  formStatus.hidden = false;
+  formStatus.textContent = 'Messages are not transmitted from this portfolio demo.';
 });
 
 setupWindMarker();

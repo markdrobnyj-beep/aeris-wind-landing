@@ -13,11 +13,12 @@
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="AERIS home">AERIS<span>®</span></a>
-      <nav class="nav-links" aria-label="Main navigation">
+      <nav class="nav-links" id="main-navigation" aria-label="Main navigation">
         <a href="#projects">Projects</a>
         <a href="#technology">Technology</a>
         <a href="#impact">Impact</a>
       </nav>
+      <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="main-navigation">Menu</button>
       <button class="button button-dark header-cta" type="button" data-open-contact aria-controls="contact-dialog">Start a project <span aria-hidden="true">↗</span></button>
     </header>
 
@@ -104,19 +105,18 @@
 
     <footer class="site-footer"><a class="brand" href="#top">AERIS<span>®</span></a><p>© 2026 AERIS Energy. Built for a moving world.</p><a href="mailto:hello@aeris.energy">hello@aeris.energy</a></footer>
 
-    <div class="dialog-backdrop" id="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" hidden>
-      <div class="contact-dialog">
-        <button class="dialog-close" type="button" data-close-contact aria-label="Close contact form">×</button>
-        <p class="eyebrow">AERIS / Contact</p>
-        <h2 id="dialog-title">Start with a<br /><em>good question.</em></h2>
-        <form data-contact-form>
-          <label>Your name<input name="name" type="text" autocomplete="name" required /></label>
-          <label>Email address<input name="email" type="email" autocomplete="email" required /></label>
-          <label>What are you building?<textarea name="message" rows="3" required></textarea></label>
-          <button class="button button-dark" type="submit">Send inquiry <span aria-hidden="true">↗</span></button>
-        </form>
-      </div>
-    </div>
+    <dialog class="contact-dialog" id="contact-dialog" aria-labelledby="dialog-title">
+      <button class="dialog-close" type="button" data-close-contact aria-label="Close contact form">×</button>
+      <p class="eyebrow">AERIS / Contact</p>
+      <h2 id="dialog-title">Start with a<br /><em>good question.</em></h2>
+      <form data-contact-form>
+        <label>Your name<input name="name" type="text" autocomplete="name" required /></label>
+        <label>Email address<input name="email" type="email" autocomplete="email" required /></label>
+        <label>What are you building?<textarea name="message" rows="3" required></textarea></label>
+        <button class="button button-dark" type="submit">Send inquiry <span aria-hidden="true">↗</span></button>
+      </form>
+      <p class="form-success" data-contact-status aria-live="polite" hidden></p>
+    </dialog>
     <script src="script.js"></script>
   </body>
 </html>

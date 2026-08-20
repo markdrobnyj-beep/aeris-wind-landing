@@ -61,3 +61,20 @@ test('page communicates fleet scale and planned capacity', async () => {
     assert.ok(html.includes(fragment), `Missing ${fragment}`);
   }
 });
+
+test('mobile navigation remains operable without the desktop links', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const js = await readFile(new URL('../script.js', import.meta.url), 'utf8');
+  assert.match(html, /data-menu-toggle/);
+  assert.match(html, /aria-controls="main-navigation"/);
+  assert.match(js, /data-menu-toggle/);
+});
+
+test('contact dialog uses native modal semantics and announces the demo status', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const js = await readFile(new URL('../script.js', import.meta.url), 'utf8');
+  assert.match(html, /<dialog[^>]*id="contact-dialog"/);
+  assert.match(html, /data-contact-status[^>]*aria-live="polite"/);
+  assert.match(js, /showModal\(\)/);
+  assert.match(js, /Messages are not transmitted from this portfolio demo/);
+});
