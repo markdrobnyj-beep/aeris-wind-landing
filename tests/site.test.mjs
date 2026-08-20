@@ -113,3 +113,12 @@ test('desktop hero keeps the full-screen two-line reference composition', async 
   assert.match(css, /\.hero-content\s*\{[^}]*width:\s*min\(780px, 100%\)/);
   assert.match(css, /\.hero-stats\s*\{[^}]*display:\s*none/);
 });
+
+test('project cards use local landscape photography instead of gradients alone', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+  for (const filename of ['project-alba.jpg', 'project-vela.jpg', 'project-noma.jpg']) {
+    const exists = await access(new URL(`../assets/${filename}`, import.meta.url)).then(() => true, () => false);
+    assert.ok(exists, `Missing ${filename}`);
+    assert.match(css, new RegExp(`url\\("assets/${filename}"\\)`));
+  }
+});
