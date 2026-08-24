@@ -4,7 +4,7 @@
 
 **Live site:** [markdrobnyj-beep.github.io/aeris-wind-landing](https://markdrobnyj-beep.github.io/aeris-wind-landing/)
 
-AERIS is a visual portfolio landing page for a wind energy studio. The page uses a landscape-led art direction, soft atmospheric motion, project stories, impact metrics, and a lightweight contact demo.
+AERIS is a visual portfolio landing page for a wind energy studio. The page uses a landscape-led art direction, soft atmospheric motion, project stories, impact metrics, and a lightweight contact-form demo.
 
 ![AERIS landscape artwork](assets/hills.png)
 
@@ -14,7 +14,7 @@ AERIS is a visual portfolio landing page for a wind energy studio. The page uses
 - Native dialog contact flow with accessible labels and status messaging.
 - Reduced-motion support for ambient animation.
 - Local landscape photography for the project cards.
-- Annual clean-generation chart with a clearly marked forecast year.
+- Annual clean-energy generation chart with a clearly marked forecast year.
 - No framework or runtime dependency required.
 
 ## Tech stack
@@ -38,7 +38,7 @@ AERIS is a visual portfolio landing page for a wind energy studio. The page uses
 
 ## Run locally
 
-Because the project is static, any local web server is enough:
+Node.js 18+ is required for the test runner. Because the project is static, any local web server is enough:
 
 ```bash
 python -m http.server 4173
